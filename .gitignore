@@ -1,0 +1,12 @@
+# Cache do Godot 4
+.godot/
+
+# Arquivos temporários de compilação do C++ (GDExtension e SCons)
+*.o
+*.os
+*.obj
+.sconsign.dblite
+
+# Pastas de exportação do jogo (se você criar depois)
+/exports/
+/builds/

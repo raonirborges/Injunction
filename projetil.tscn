@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://chiqutafrgaob"]
+
+[ext_resource type="Script" uid="uid://bjq24y8ycn4v0" path="res://projetil.gd" id="1_e138m"]
+[ext_resource type="Texture2D" uid="uid://dsbr8hdbuuafj" path="res://Besta_ammo.png" id="2_d76vc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jwi5c"]
+radius = 1.0
+height = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwi5c"]
+size = Vector2(20, 2)
+
+[node name="Projetil" type="Area2D" unique_id=760732173]
+script = ExtResource("1_e138m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1137996385]
+position = Vector2(-0.505, 0.095)
+rotation = 1.5707964
+scale = Vector2(0.2, 1.025)
+shape = SubResource("CapsuleShape2D_jwi5c")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=584180109]
+position = Vector2(-0.50000024, 3.5762787e-07)
+rotation = 0.74700093
+scale = Vector2(0.34615386, 0.30769232)
+texture = ExtResource("2_d76vc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1887285086]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1436196610]
+position = Vector2(-0.5, 0.045)
+scale = Vector2(0.4, 0.205)
+shape = SubResource("RectangleShape2D_jwi5c")
+one_way_collision = true
+one_way_collision_direction = Vector2(0, -1)
