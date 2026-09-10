@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cw2vfsiiqjbkx"]
+
+[ext_resource type="Script" uid="uid://cgyfb4ejqci8l" path="res://gota.gd" id="1_htol5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jwi5c"]
+bounce = 0.6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jwi5c"]
+
+[node name="Gota" type="RigidBody2D" unique_id=1024213496]
+physics_material_override = SubResource("PhysicsMaterial_jwi5c")
+gravity_scale = 0.68
+script = ExtResource("1_htol5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=453366195]
+modulate = Color(0.023529412, 0.34901962, 1, 1)
+self_modulate = Color(0, 0.3764706, 1, 1)
+scale = Vector2(0.05, 0.05)
+shape = SubResource("CircleShape2D_jwi5c")
+debug_color = Color(0.28814703, 0.40160805, 1, 0.41960785)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=971253006]
+offset_right = 1.0
+offset_bottom = 1.0
+offset_transform_position = Vector2(-0.5, -0.44)
+color = Color(0, 0.34509805, 1, 1)
