@@ -7,7 +7,6 @@ const FORCA_KNOCKBACK_Y = -120.0
 var sofrendo_knockback: bool = false
 var hp: int = 100
 
-@export var cena_gota: PackedScene
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var familiar: AnimatedSprite2D = $Familiar
@@ -44,24 +43,12 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	# Spawna água continuamente na posição do mouse enquanto segura a tecla Z (atirar_agua)
-	if Input.is_action_pressed("atirar_agua"):
-		spawnar_gota()
-
 	move_and_slide()
 	
 	controlar_tiro()
 	atualizar_animacao()
 	atualizar_familiar(delta)
-
-func spawnar_gota() -> void:
-	if cena_gota:
-		var gota = cena_gota.instantiate()
-		get_parent().add_child(gota)
-		gota.global_position = get_global_mouse_position()
-	else:
-		printerr("ERRO: Arraste a cena da gota para o campo 'Cena Gota' no Inspector do Player!")
-
+	
 func controlar_tiro() -> void:
 	if estado_besta == "livre":
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and municao_atual > 0:

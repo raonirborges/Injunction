@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://dear8kifu6sij" path="res://Screenshot_20260724_105032.png" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://cvnwmgp0uhyhh" path="res://player.gd" id="2_0hol4"]
-[ext_resource type="PackedScene" uid="uid://cw2vfsiiqjbkx" path="res://gota.tscn" id="3_d2bti"]
 [ext_resource type="PackedScene" uid="uid://chiqutafrgaob" path="res://projetil.tscn" id="3_x0ka3"]
 [ext_resource type="Texture2D" uid="uid://8ho35esprkon" path="res://NES - Castlevania - Miscellaneous - Tilesets.png" id="4_0hol4"]
 [ext_resource type="Texture2D" uid="uid://1m8jh4sroams" path="res://NES - Castlevania III - Dracula's Curse - Playable Characters - Trevor Belmont.png" id="4_d21ai"]
@@ -14,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bte6e4uu6f4nw" path="res://Besta_idle_ammo.png" id="7_0h7mo"]
 [ext_resource type="Texture2D" uid="uid://mhmmufjcty55" path="res://Besta_idle_no_ammo.png" id="8_nr8wp"]
 [ext_resource type="Texture2D" uid="uid://dsbr8hdbuuafj" path="res://Besta_ammo.png" id="13_nr8wp"]
-[ext_resource type="Script" uid="uid://ecdwdfvnxvtv" path="res://rigid_body_2d.gd" id="14_nr8wp"]
+[ext_resource type="Shader" uid="uid://688hfmr3b0qc" path="res://fluidos.gdshader" id="14_nr8wp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hv0ov"]
 size = Vector2(7.594968, 18.3125)
@@ -9043,7 +9042,7 @@ tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_q6r6c")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jwi5c"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_flf07"]
 radius = 3.4483032
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jwi5c"]
@@ -9056,11 +9055,8 @@ shader_parameter/tolerancia = 0.1
 radius = 5.0
 height = 10.0
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jwi5c"]
-bounce = 0.1
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_b4tf0"]
-radius = 1.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b4tf0"]
+shader = ExtResource("14_nr8wp")
 
 [node name="Node2D" type="Node2D" unique_id=1666783662]
 
@@ -9073,7 +9069,6 @@ texture = ExtResource("1_0e48y")
 [node name="player" type="CharacterBody2D" parent="." unique_id=1967026172]
 position = Vector2(759, 238)
 script = ExtResource("2_0hol4")
-cena_gota = ExtResource("3_d2bti")
 cena_projetil = ExtResource("3_x0ka3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player" unique_id=1874745667]
@@ -9097,7 +9092,7 @@ animation = &"idle"
 position = Vector2(11.000017, -17.3125)
 scale = Vector2(0.43749833, 0.4375)
 sprite_frames = SubResource("SpriteFrames_jwi5c")
-animation = &"besta_reload"
+animation = &"idle_no_ammo"
 
 [node name="MunicaoVisual" type="Sprite2D" parent="player/Familiar" unique_id=335457224]
 position = Vector2(-0.5, 0)
@@ -9118,7 +9113,7 @@ script = ExtResource("6_d21ai")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1161847863]
 scale = Vector2(1.16, 1.165)
-shape = SubResource("CircleShape2D_jwi5c")
+shape = SubResource("CircleShape2D_flf07")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=964886981]
 material = SubResource("ShaderMaterial_jwi5c")
@@ -9131,15 +9126,9 @@ texture = ExtResource("6_kdubu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D" unique_id=747124655]
 shape = SubResource("CapsuleShape2D_b4tf0")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=736904839]
-physics_material_override = SubResource("PhysicsMaterial_jwi5c")
-gravity_scale = 0.52
-script = ExtResource("14_nr8wp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=130250590]
-position = Vector2(782.99994, 202.99998)
-scale = Vector2(0.05, 0.05)
-shape = SubResource("CircleShape2D_b4tf0")
-debug_color = Color(3.138125e-05, 0.23840567, 0.6971541, 0.41960785)
+[node name="GerenciadorDeFluidos" type="Sprite2D" parent="." unique_id=1526988034]
+texture_filter = 2
+material = SubResource("ShaderMaterial_b4tf0")
+position = Vector2(725.4379, 229.19551)
 
 [connection signal="body_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
